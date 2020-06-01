@@ -1,9 +1,9 @@
 from flask_cors import CORS
 from flask_restful import Resource, Api, reqparse, abort
 from flask import Flask
+import logging
 
 base_url = 'http://eruri.kangwon.ac.kr'
-
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
