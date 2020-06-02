@@ -103,15 +103,14 @@ class Course:  # 과목
             self.__client.session.get(url).text, 'html.parser'
         )
 
-        buttons = soup.select('.track_detail')
+        rows = soup.select('.user_progress_table tbody tr');
+        rows = (row for row in rows if len(row.select('td')[1].getText().strip()) > 0)
 
-        week = 1
-
-        for button in buttons:
+        for row in rows:
             done = False
             name = None
 
-            cells = button.parent.parent.select('td')
+            cells = row.select('td')
 
             # 해당 주차의 첫 번째 엘레멘트이거나 해당 주차에 하나의 영상만 있는 경우
             if len(cells) == 6 or len(cells) == 5:
