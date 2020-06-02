@@ -1,11 +1,10 @@
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from section import Section
     from client import Client
 
 
-class Activity:
+class Activity:  # 활동
     def serialize(self):
         return {
             'week': self.week,

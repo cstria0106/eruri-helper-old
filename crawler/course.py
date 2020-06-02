@@ -8,7 +8,7 @@ if TYPE_CHECKING:
     from video import Video
 
 
-class Course:
+class Course:  # 과목
     def __init__(self, client: 'Client', id: str, name: str, professor: str):
         self.__client: 'Client' = client
         self.__homeworks: Tuple['Homework'] = None
@@ -19,6 +19,8 @@ class Course:
         self.professor: str = professor
         pass
 
+    # 해당 과목의 정보를 json 객체로 나타낼 수 있도록 딕셔너리로 만든다.
+    # detailed가 True라면 강의, 과제에 대한 정보를 포함한다.
     def serialize(self, detailed=False):
         ret = {}
         ret['id'] = self.id
@@ -33,6 +35,7 @@ class Course:
 
         return ret
 
+    # 문자열로 만든다.
     def __str__(self):
 
         s = '[%s] %s (%s) %d개의 과제와 %d개의 강의\n\n[과제]\n' % (

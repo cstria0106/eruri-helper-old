@@ -4,7 +4,6 @@ from typing import List, Tuple, TYPE_CHECKING
 from api import base_url
 
 if TYPE_CHECKING:
-    from section import Section
     from course import Course
 
 
@@ -16,6 +15,7 @@ class Client:
         self.session.post(base_url + '/login/index.php',  # POST /login/index.php
                           data={'username': username, 'password': password})  # 로그인한다.
 
+        # 메인에 로그아웃이라는 글자가 있으면 로그인에 성공한 것이며 아니면 실패한 것이다.
         if '로그아웃' in self.session.get(base_url + '/').text:
             self.logged_in = True
         else:
@@ -32,7 +32,6 @@ class Client:
     def __load_courses(self) -> Tuple['Course']:
         from course import Course
 
-        # GET /
         response = self.session.get(base_url + '/')
         soup = BeautifulSoup(response.text, 'html.parser')
 
